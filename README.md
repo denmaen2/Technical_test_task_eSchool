@@ -1,4 +1,7 @@
 # Technical_test_task_eSchool
+
+Some code, especially ssh and ansible parts used from previous projects
+
 Useful links:
 
 Azure cli https://learn.microsoft.com/en-us/cli/azure/ad/sp?view=azure-cli-latest
