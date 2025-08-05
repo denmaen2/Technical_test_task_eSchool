@@ -35,12 +35,3 @@ AI used for fixing issues during building (as a debug helper) and as helper of c
     login_unix_socket: /var/run/mysqld/mysqld.sock
     query: "FLUSH PRIVILEGES"
   become: yes
-# Technical_test_task_eSchool
-
-## Setup Instructions
-
-1. Copy `terraform/service-principal-credentials.json.example` to `terraform/service-principal-credentials.json`
-2. Fill in your actual Azure service principal credentials
-3. Run `terraform init` and `terraform plan`
-
-**Note:** Never commit actual credentials to the repository!
