@@ -1,0 +1,10 @@
+---
+- name: Install MySQL client
+  apt:
+    name: mysql-client
+    state: present
+- name: Allow MySQL through firewall
+  ufw:
+    rule: allow
+    port: '3306'
+    proto: tcp

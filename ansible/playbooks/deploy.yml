@@ -1,0 +1,70 @@
+---
+- name: Update cache
+  hosts: all
+  become: yes
+  vars_files:
+    - vars.json
+  roles:
+    - apt-cache
+
+- name: Install OpenJDK
+  hosts: vm1
+  become: yes
+  vars_files:
+    - vars.json
+  roles:
+    - openjdk-8-jdk
+
+- name: Install Maven
+  hosts: vm1
+  vars_files:
+    - vars.json
+  roles:
+    - role: gantsign.maven
+      maven_version: '3.9.4'
+
+- name: Install Git
+  hosts: vm1
+  become: yes
+  vars_files:
+    - vars.json
+  roles:
+    - Git
+
+- name: Clone Git repository
+  hosts: vm1
+  vars_files:
+    - vars.json
+  tasks:
+    - name: Clone repository
+      git:
+        repo: https://github.com/yurkovskiy/eSchool
+        dest: /home/ubuntu/eSchool
+        force: yes
+      become_user: ubuntu
+
+- name: Install MySQL Server
+  hosts: vm2
+  become: yes
+  vars_files:
+    - vars.json
+  roles:
+    - MySQL
+
+- name: Install MySQL Client
+  hosts: vm1
+  become: yes
+  vars_files:
+    - vars.json
+  roles:
+    - MySQL-client
+
+- name: Deploy eSchool Spring Boot Application
+  hosts: vm1
+  become: yes
+  vars_files:
+    - vars.json
+  vars:
+    vm2_ip: "{{ lookup('file', './ip-file.txt') | trim }}"
+  roles:
+    - Build-run
