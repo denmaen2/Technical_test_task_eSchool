@@ -16,3 +16,5 @@ Thumbs.db
 *.swo
 service-principal-credentials.json
 *.json
+service-principal-credentials.json
+*.json
